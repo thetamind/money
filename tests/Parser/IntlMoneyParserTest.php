@@ -38,6 +38,8 @@ final class IntlMoneyParserTest extends \PHPUnit_Framework_TestCase
             ['$1', 100],
             ['$.99', 99],
             ['-$.99', -99],
+            ['$75.50', 7550],
+            ['-$75.50', -7550],
         ];
     }
 
@@ -87,6 +89,18 @@ final class IntlMoneyParserTest extends \PHPUnit_Framework_TestCase
         $money = $parser->parse('$1000.005');
 
         $this->assertEquals('1000005', $money->getAmount());
+    }
+
+    public function testFractionDigitsTrailingZero()
+    {
+        $formatter = new \NumberFormatter('en_US', \NumberFormatter::CURRENCY);
+        $formatter->setPattern('¤#,##0.00;-¤#,##0.00');
+        $formatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, 3);
+
+        $parser = new IntlMoneyParser($formatter);
+        $money = $parser->parse('$1000.500');
+
+        $this->assertEquals('1000500', $money->getAmount());
     }
 
     public function testDifferentStyleWithPattern()

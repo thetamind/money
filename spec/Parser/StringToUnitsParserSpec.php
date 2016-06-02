@@ -53,6 +53,8 @@ class StringToUnitsParserSpec extends ObjectBehavior
             ['-.99', -99],
             ['0', '0'],
             ['-0', '0'],
+            ['1.50', '150'],
+            ['-1.50', '-150'],
         ];
     }
 
