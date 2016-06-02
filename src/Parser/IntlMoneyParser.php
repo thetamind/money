@@ -59,6 +59,10 @@ final class IntlMoneyParser implements MoneyParser
             $decimal = ltrim($decimal, '0');
         }
 
+        if ($decimal === '' || $decimal === '-') {
+            $decimal = '0';
+        }
+
         if ($forceCurrency === null) {
             $forceCurrency = $currency;
         }
