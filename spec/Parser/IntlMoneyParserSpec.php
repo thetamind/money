@@ -62,6 +62,8 @@ class IntlMoneyParserSpec extends ObjectBehavior
             ['-€.99', -99],
             ['€0', 0],
             ['-€0', -0],
+            ['€1.10', 110],
+            ['-€1.10', -110],
         ];
     }
 
